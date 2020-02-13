@@ -1,9 +1,7 @@
-name: Node.js CI
-
+name: Add report file
 on:
   repository_dispatch:
     types: pull-serial-vault
-
 jobs:
   createPullRequest:
     runs-on: ubuntu-latest
@@ -20,3 +18,5 @@ jobs:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
           commit-message: "WIP: Automated javascript build"
           title: '[WIP] Add builded javascript/css files'
+          body: Build new javascript and css
+          branch: update-js-build
