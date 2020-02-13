@@ -5,29 +5,18 @@ on:
     types: pull-serial-vault
 
 jobs:
-  build:
-
+  createPullRequest:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
       with:
         repository: CanonicalLtd/serial-vault
-    - name: Use Node.js 12.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-        run: |
-          cd webapp-admin
-          npm install
-          npm run build --if-present
-          cp -R build/static/js/*.js ../static/js/bundle.js
-          cp -R build/static/css/*.css ../static/css/application.css
-          cp -R build/static/css/*.css.map ../static/css/application.css.map
+    - name: Create report file
+      run: date +%s > report.txt
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v2
+      id: cpr
       with:
         token: ${{ secrets.MY_GITHUB_TOKEN }}
         commit-message: "WIP: Automated javascript build"
         title: '[WIP] Add builded javascript/css files'
-        branch: action-js-build
