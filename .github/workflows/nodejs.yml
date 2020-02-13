@@ -3,8 +3,6 @@ name: Node.js CI
 on:
   repository_dispatch:
     types: pull-serial-vault
-  schedule:
-    - cron:  '*/10 * * * *'
 
 jobs:
   build:
