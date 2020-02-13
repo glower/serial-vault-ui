@@ -18,8 +18,8 @@ jobs:
         with:
           repositoryOwner: CanonicalLtd
           repositoryName: serial-vault
-          token: ${{ secrets.MY_GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: update authors
           title: Update AUTHORS
           body: Credit new contributors by updating AUTHORS
-          branch: update-authors
+          branch: ${{ github.head_ref }}
