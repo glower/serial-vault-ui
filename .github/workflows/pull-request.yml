@@ -1,22 +1,22 @@
-name: Add report file
+name: Update AUTHORS
 on:
   repository_dispatch:
     types: pull-serial-vault
 jobs:
-  createPullRequest:
+  updateAuthors:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: CanonicalLtd/serial-vault
-      - name: Create report file
-        run: date +%s > report.txt
+          fetch-depth: 0
+      - name: Update AUTHORS
+        run: |
+          git log --format='%aN <%aE>%n%cN <%cE>' | sort -u > AUTHORS
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
-        id: cpr
         with:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
-          commit-message: "WIP: Automated javascript build"
-          title: '[WIP] Add builded javascript/css files'
-          body: Build new javascript and css
-          branch: update-js-build
+          commit-message: update authors
+          title: Update AUTHORS
+          body: Credit new contributors by updating AUTHORS
+          branch: update-authors
