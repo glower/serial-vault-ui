@@ -16,6 +16,8 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
+          repositoryOwner: CanonicalLtd
+          repositoryName: serial-vault
           token: ${{ secrets.MY_GITHUB_TOKEN }}
           commit-message: update authors
           title: Update AUTHORS
